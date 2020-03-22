@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default_layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<!-- 여기에 상세 내용을 적으세요-->
+<section layout:fragment="content">
+    <div class="row">
+        <p> 한국신용평가 기본 페이지 입니다. </p>
+    </div>
+    <div class="row">
+        <p th:text="${@environment.getProperty('kis.message.title')}"></p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-edit"></i> Modal Examples</h3>
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-default"
+                            data-toggle="modal" data-target="#modal-default">Launch Default Modal</button>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-default" id="test_btn"> 테스트</button>
+
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-default" id="test_btn2"> 테스트2</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Default Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body…</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</section>
+<!-- 스크립트는 여기서 추가해 주세요.-->
+<script layout:fragment="page_javascript">
+    $(function () {
+        console.log("TEST");
+
+
+        $('#test_btn').click( function () {
+            //kis.alert('KIS ALERT!!!', 'TITLE')
+            bootbox.alert({
+                title: "경고",
+                message: "This is an alert with a callback!",
+                callback: function () {
+                    console.log('This was logged in the callback!');
+                }
+            })
+        });
+
+        $('#test_btn2').click( function () {
+            kis.alert('KIS ALERT!!!')
+            //bootbox.alert("Alert Example");
+        });
+
+
+    });
+
+    var kis = {};
+    kis.alert = function ( message, title ) {
+        let target = document.querySelector('#__common_modal_alert').cloneNode(true);
+        if(title){
+            target.querySelector('.modal-title').innerHTML = title;
+        } else {
+            target.querySelector('.modal-header').style.display = 'none';
+        }
+        target.querySelector('.modal-body').innerText = message;
+        return $(target).modal();
+    }
+</script>
+</body>
+</html>

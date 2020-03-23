@@ -4,15 +4,15 @@
 ## 사용된 라이브러리 
 - jdk 1.8
 - Spring boot 2
-    - lombok : 코드를 간소화 시킴 
+    - [lombok](https://projectlombok.org/) : 기초적인 방식에 대해 정리 [[go]](doc/lib/lombok.md)
 - BootStrap 4
-    - AdminLte 3 : 관리자용 템플릿 
-    - bootbox : 팝업 
+    - [AdminLte 3](https://github.com/ColorlibHQ/AdminLTE) : 관리자용 템플릿 
+    - [bootbox](http://bootboxjs.com/) : dialog 생성용 라이브러리 
 - 추가될 예정 
 
 ## 필수 설치 라이브러리
 - git : 없으면 github에서 별도로 다운로드 받아와야 한다. 
-- gradel : maven 대신 사용
+- gradle : maven 대신 사용
 
 # 다운로드 및 실행 
 ## 다운로드
@@ -29,7 +29,7 @@ git clone https://github.com/ogredwarf/kis-skeleton.git
 ```
 gradle build
 ```
-- 빌드 이후에 다음의 명령어를 치면, 실행이 된다.  
+- 빌드 이후에 다음의 명령어를 치면, 실행이 된다.[1]
 ```
 gradle bootRun
 ```
@@ -38,3 +38,6 @@ gradle bootRun
 
 #참고자료 
 - [마크다운 문법](https://gist.github.com/ihoneymon/652be052a0727ad59601)
+- [HELP.md](HELP.md)
+
+

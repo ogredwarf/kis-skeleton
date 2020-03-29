@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">한국신용평가</title>
+    <th:block layout:replace="fragments/common_import :: common_css"></th:block>
+    <style type="text/css">
+        .container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <header layout:replace="fragments/default_header::menu">
+    </header>
+    <section class="content-wrapper">
+
+        <!-- Main Contents -->
+        <section class="content">
+            <div layout:fragment="content" class="container-fluid">
+
+            </div>
+        </section>
+    </section>
+    <footer layout:replace="fragments/default_footer::footer">
+    </footer>
+</div>
+<th:block layout:replace="fragments/common_import::common_dialog"></th:block>
+<!-- 페이지용 자바 스크립트 추가 -->
+<th:block layout:replace="fragments/common_import::common_javascript"></th:block>
+<script layout:fragment="page_javascript" type="text/javascript" ></script>
+
+
+</body>
+</html>

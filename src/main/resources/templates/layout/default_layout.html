@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,7 +43,7 @@
 <th:block layout:replace="~{fragments/common_import::common_dialog}"></th:block>
 <!-- 페이지용 자바 스크립트 추가 -->
 <th:block layout:replace="~{fragments/common_import::common_javascript}"></th:block>
-<script layout:fragment="page_javascript" type="text/javascript" ></script>
+<script layout:fragment="page_javascript" type="text/javascript"></script>
 
 
 </body>

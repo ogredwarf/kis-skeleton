@@ -1,13 +1,20 @@
+buildscript {
+    ext {
+        springVersion = '2.4.4'
+    }
+}
+
+
 plugins {
     id 'org.springframework.boot' version '2.2.4.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'io.spring.dependency-management' version "1.0.11.RELEASE"
     id 'java'
     id 'idea'
 }
 
 group = 'com.kisrating'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+//sourceCompatibility = '1.8'
 
 configurations {
     developmentOnly
@@ -20,29 +27,44 @@ configurations {
 }
 
 repositories {
+    google()
     mavenCentral()
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+
+
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+
+
+
     /*thymeleaf 설정 */
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation( 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: "${springVersion}"
+    /*implementation( 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')*/
+    implementation group: 'com.github.zhanhb', name: 'thymeleaf-layout-dialect', version: '2.5.2'
 
     /*spring 기본 */
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.session:spring-session-core'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springVersion}"
 
     /*util*/
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
+    //implementation group: 'net.rakugakibox.spring.boot', name: 'logback-access-spring-boot-starter', version: '2.7.1'
+
 
 }
 
+/*
 test {
     useJUnitPlatform()
-}
+}*/

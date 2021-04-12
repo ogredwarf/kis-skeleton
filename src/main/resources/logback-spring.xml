@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration>
 <configuration>
-
-    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
-
-    <!-- 변수 지정 -->
-    <property name="LOG_DIR" value="./logs" />
-    <property name="LOG_PATH_NAME" value="${LOG_DIR}/data.log" />
-
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%L\) : %m%n</pattern>
-        </encoder>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%-5level] [%thread] [%logger{36}] - %m%n</Pattern>
+        </layout>
     </appender>
 
-    <!-- FILE Appender -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH_NAME}</file>
-        <!-- 일자별로 로그파일 적용하기 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH_NAME}.%d{yyyyMMdd}</fileNamePattern>
-            <maxHistory>60</maxHistory> <!-- 일자별 백업파일의 보관기간 -->
-        </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%L\) : %m%n</pattern>
+            <Pattern>%d{yyyy-mm-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M [%L]- %msg%n</Pattern>
         </encoder>
+        <file>${LOGS}/spring-boot-logger.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/spring-boot-logger-%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
     </appender>
 
     <!-- 로거 네임 -->
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.springboot" level="INFO"/>
     <logger name="org.thymeleaf" level="ERROR"/>
+
+    <!--<root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>-->
+
+    <!--<root>
+        <springProfile name="local">
+            <appender-ref ref="CONSOLE"/>
+        </springProfile>
+
+        <springProfile name="prod">
+            <appender-ref ref="FILE"/>
+        </springProfile>
+    </root>-->
+
 
     <!-- TRACE > DEBUG > INFO > WARN > ERROR, 대소문자 구분 안함 -->
     <!-- profile 을 읽어서 appender 을 설정할수 있다.(phase별 파일을 안만들어도 되는 좋은 기능) -->
@@ -43,7 +50,7 @@
 
     <springProfile name="prod">
         <root level="INFO">
-            <appender-ref ref="FILE" />
+            <!--<appender-ref ref="FILE" />-->
             <appender-ref ref="STDOUT" />
         </root>
     </springProfile>
